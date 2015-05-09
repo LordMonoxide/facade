@@ -1,0 +1,25 @@
+{
+    "name": "lordmonoxide/facade",
+    "description": "Pseudo-static accessors for Phi bindings",
+    "license": "GPLv3",
+    "homepage": "http://github.com/LordMonoxide/facade",
+    "keywords": ["Facade", "IOC", "Inversion of control", "DI", "Dependency injection"],
+    "authors": [
+        {
+            "name": "Corey Frenette",
+            "email": "corey@narwhunderful.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "lordmonoxide/phi": "1.1.*"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+    	"psr-4": {
+            "LordMonoxide\\Facade\\": "src/"
+        }
+    }
+}
