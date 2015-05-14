@@ -1,10 +1,23 @@
-[![Build Status](https://travis-ci.org/LordMonoxide/facade.svg?branch=1.0.0)](https://travis-ci.org/LordMonoxide/facade)
-[![Coverage Status](https://coveralls.io/repos/LordMonoxide/facade/badge.svg?branch=1.0.0)](https://coveralls.io/r/LordMonoxide/facade?branch=1.0.0)
+[![Build Status](https://travis-ci.org/LordMonoxide/facade.svg?branch=1.0.1)](https://travis-ci.org/LordMonoxide/facade)
+[![Coverage Status](https://coveralls.io/repos/LordMonoxide/facade/badge.svg?branch=1.0.1)](https://coveralls.io/r/LordMonoxide/facade?branch=1.0.1)
 [![License](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)
 
 # Phi Facades
 
 Facades are a way to make Phi bindings feel more natural.
+
+## Installation
+
+### Composer
+[Composer](https://getcomposer.org/) is the recommended method of installation for Facade.
+
+```
+$ composer require lordmonoxide/facade
+```
+
+### GitHub
+
+Facade may be downloaded from [GitHub](https://github.com/LordMonoxide/facade/).
 
 ## Features
 
@@ -64,3 +77,6 @@ This will allow Phi to be accessed as such:
 Phi::bind('Bar', 'Foo');
 $foo = Phi::make('Bar');
 ```
+
+### Phi Custom Resolvers
+If you are using Phi 1.2.0 or greater, Phi facades will work seamlessly with custom resolvers.
