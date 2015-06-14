@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/LordMonoxide/facade.svg?branch=1.0.1)](https://travis-ci.org/LordMonoxide/facade)
-[![Coverage Status](https://coveralls.io/repos/LordMonoxide/facade/badge.svg?branch=1.0.1)](https://coveralls.io/r/LordMonoxide/facade?branch=1.0.1)
-[![License](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)
+[![Build Status](https://travis-ci.org/BapCat/facade.svg?branch=1.0.0)](https://travis-ci.org/BapCat/facade)
+[![Coverage Status](https://coveralls.io/repos/BapCat/facade/badge.svg?branch=1.0.0)](https://coveralls.io/r/BapCat/facade?branch=1.0.0)
+[![License](https://img.shields.io/packagist/l/BapCat/facade.svg)](https://img.shields.io/packagist/l/BapCat/facade.svg)
 
 # Phi Facades
 
@@ -12,12 +12,12 @@ Facades are a way to make Phi bindings feel more natural.
 [Composer](https://getcomposer.org/) is the recommended method of installation for Facade.
 
 ```
-$ composer require lordmonoxide/facade
+$ composer require bapcat/facade
 ```
 
 ### GitHub
 
-Facade may be downloaded from [GitHub](https://github.com/LordMonoxide/facade/).
+Facade may be downloaded from [GitHub](https://github.com/BapCat/Facade/).
 
 ## Features
 
@@ -38,12 +38,12 @@ class Logger {
 ```php
 $logger = new Vendor\Package\Logging\Logger;
 
-$phi = LordMonoxide\Phi\Phi::instance();
+$phi = BapCat\Phi\Phi::instance();
 $phi->bind('core.log', $logger);
 ```
 
 ```php
-use LordMonoxide\Facade\Facade;
+use BapCat\Facade\Facade;
 
 class Log extends Facade {
   protected static $_binding = 'core.log';
@@ -59,12 +59,12 @@ Log::warning('Something bad happened!');
 Phi Facades can even be used to create a facade for Phi:
 
 ```php
-$phi = LordMonoxide\Phi\Phi::instance();
+$phi = BapCat\Phi\Phi::instance();
 $phi->bind('phi', $phi);
 ```
 
 ```php
-use LordMonoxide\Facade\Facade;
+use BapCat\Facade\Facade;
 
 class Phi extends Facade {
   protected static $_binding = 'phi';

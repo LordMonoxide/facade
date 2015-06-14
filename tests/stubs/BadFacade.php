@@ -1,6 +1,6 @@
 <?php
 
-use LordMonoxide\Facade\Facade;
+use BapCat\Facade\Facade;
 
 class BadFacade extends Facade {
   

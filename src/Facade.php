@@ -1,6 +1,6 @@
-<?php namespace LordMonoxide\Facade;
+<?php namespace BapCat\Facade;
 
-use LordMonoxide\Phi\Phi;
+use BapCat\Phi\Phi;
 
 use InvalidArgumentException;
 
