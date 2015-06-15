@@ -1,6 +1,6 @@
 <?php namespace BapCat\Facade;
 
-use BapCat\Phi\Phi;
+use BapCat\Interfaces\Ioc\Ioc;
 
 use InvalidArgumentException;
 
@@ -10,6 +10,12 @@ use InvalidArgumentException;
  * All Facades must set `protected static $_binding` to a valid Phi binding.
  */
 class Facade {
+  private static $ioc = null;
+  
+  public static function setIoc(Ioc $ioc) {
+    self::$ioc = $ioc;
+  }
+  
   /**
    * Passes arguments on to the instance gotten from Phi
    * 
@@ -27,7 +33,7 @@ class Facade {
     }
     
     // Grab the instance and call the function
-    $instance = Phi::instance()->make(static::$_binding);
+    $instance = self::$ioc->make(static::$_binding);
     return call_user_func_array([$instance, $name], $arguments);
   }
 }

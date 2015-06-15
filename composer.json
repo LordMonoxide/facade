@@ -12,9 +12,10 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "bapcat/phi": "^1.0"
+    "bapcat/interfaces": "dev-master"
   },
   "require-dev": {
+    "bapcat/phi": "^1.0",
     "satooshi/php-coveralls": "dev-master"
   },
   "autoload": {

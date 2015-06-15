@@ -1,14 +1,17 @@
 <?php
 
 require_once __DIR__ . '/stubs/BadFacade.php';
-require_once __DIR__ . '/stubs/CustomResolver.php';
 require_once __DIR__ . '/stubs/Foo.php';
 require_once __DIR__ . '/stubs/FooFacade.php';
-require_once __DIR__ . '/stubs/GiveMeAFooFacade.php';
 
 use BapCat\Facade\Facade;
+use BapCat\Phi\Phi;
 
 class FacadeTest extends PHPUnit_Framework_TestCase {
+  public function setUp() {
+    Facade::setIoc(Phi::instance());
+  }
+  
   public function testFacade() {
     $this->assertEquals('bar', FooFacade::getBar());
     $this->assertEquals('bar', FooFacade::returnThisVar('bar'));
@@ -17,13 +20,5 @@ class FacadeTest extends PHPUnit_Framework_TestCase {
   public function testBadFacade() {
     $this->setExpectedException('InvalidArgumentException');
     $bar = BadFacade::test();
-  }
-  
-  public function testCustomResolver() {
-    $phi = BapCat\Phi\Phi::instance();
-    $phi->addResolver(new CustomResolver);
-    
-    $this->assertEquals('bar', GiveMeAFooFacade::getBar());
-    $this->assertEquals('bar', FooFacade::getBar());
   }
 }
