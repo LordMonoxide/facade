@@ -4,7 +4,6 @@
   "license": "GPLv3",
   "homepage": "http://github.com/BapCat/Facade",
   "keywords": ["Facade", "IOC", "Inversion of control", "DI", "Dependency injection"],
-  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Corey Frenette",
@@ -12,12 +11,11 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0",
-    "bapcat/interfaces": "dev-master"
+    "php": ">=5.5.0",
+    "bapcat/interfaces": "^1.0"
   },
   "require-dev": {
-    "bapcat/phi": "^1.0",
-    "satooshi/php-coveralls": "dev-master"
+    "bapcat/phi": "^1.0"
   },
   "autoload": {
     "psr-4": {
