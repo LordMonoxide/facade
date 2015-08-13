@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/BapCat/Facade.svg?branch=1.0.0)](https://travis-ci.org/BapCat/Facade)
-[![Coverage Status](https://coveralls.io/repos/BapCat/Facade/badge.svg?branch=1.0.0)](https://coveralls.io/r/BapCat/Facade?branch=1.0.0)
+[![Build Status](https://travis-ci.org/BapCat/Facade.svg?branch=1.0.1)](https://travis-ci.org/BapCat/Facade)
+[![Coverage Status](https://coveralls.io/repos/BapCat/Facade/badge.svg?branch=1.0.1)](https://coveralls.io/r/BapCat/Facade?branch=1.0.1)
 [![License](https://img.shields.io/packagist/l/BapCat/Facade.svg)](https://img.shields.io/packagist/l/BapCat/Facade.svg)
 
 # Phi Facades
