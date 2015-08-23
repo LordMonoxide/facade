@@ -1,3 +1,5 @@
+# This package has been superceded by [BapCat/Facade](https://github.com/BapCat/Facade/).
+
 [![Build Status](https://travis-ci.org/LordMonoxide/facade.svg?branch=1.0.1)](https://travis-ci.org/LordMonoxide/facade)
 [![Coverage Status](https://coveralls.io/repos/LordMonoxide/facade/badge.svg?branch=1.0.1)](https://coveralls.io/r/LordMonoxide/facade?branch=1.0.1)
 [![License](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)](https://img.shields.io/packagist/l/LordMonoxide/facade.svg)
