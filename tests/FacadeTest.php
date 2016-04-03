@@ -19,6 +19,6 @@ class FacadeTest extends PHPUnit_Framework_TestCase {
   
   public function testBadFacade() {
     $this->setExpectedException('InvalidArgumentException');
-    $bar = BadFacade::test();
+    BadFacade::test();
   }
 }
