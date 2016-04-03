@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 /**
  * Pseudo-static accessors for Phi bindings
- * 
+ *
  * All Facades must set `protected static $_binding` to a valid Phi binding.
  */
 class Facade {
@@ -18,12 +18,12 @@ class Facade {
   
   /**
    * Passes arguments on to the instance gotten from Phi
-   * 
+   *
    * @throws  InvalidArgumentException  If $_binding wasn't set in the subclass
-   * 
+   *
    * @param   string  $name       The function to call
    * @param   array   $arguments  The arguments to pass to the binding
-   * 
+   *
    * @returns mixed   The return value of the function
    */
   public static function __callStatic($name, array $arguments) {
@@ -34,6 +34,6 @@ class Facade {
     
     // Grab the instance and call the function
     $instance = self::$ioc->make(static::$_binding);
-    return call_user_func_array([$instance, $name], $arguments);
+    return $instance->$name(...$arguments);
   }
 }

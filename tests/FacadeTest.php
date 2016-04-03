@@ -17,8 +17,18 @@ class FacadeTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('bar', FooFacade::returnThisVar('bar'));
   }
   
+  /**
+   * @expectedException InvalidArgumentException
+   */
   public function testBadFacade() {
-    $this->setExpectedException('InvalidArgumentException');
     BadFacade::test();
+  }
+  
+  /**
+   * @requires PHP 7
+   * @expectedException Error
+   */
+  public function testCallingMethodThatDoesntExist() {
+    FooFacade::thisMethodDoesntExist();
   }
 }
