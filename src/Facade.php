@@ -16,7 +16,8 @@ abstract class Facade {
     }
     
     try {
-      return (static::$ioc)::instance()->make(static::$binding);
+      $ioc = static::$ioc;
+      return $ioc::instance()->make(static::$binding);
     } catch(ReflectionException $e) {
       throw new InvalidArgumentException(static::class . " has an invalid binding: {$e->getMessage()}", 0, $e);
     }
