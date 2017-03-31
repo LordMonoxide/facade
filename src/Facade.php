@@ -2,19 +2,24 @@
 
 use BapCat\Phi\Phi;
 
+use InvalidArgumentException;
+use ReflectionException;
+
 abstract class Facade {
   protected static $ioc = Phi::class;
-  
-  private static $inst;
+  protected static $binding;
   
   protected static function inst() {
     // Throw an exception if $binding wasn't set in the subclass
     if(!isset(static::$binding)) {
-      throw new InvalidArgumentException(get_called_class() . ' must set "protected static $binding".');
+      throw new InvalidArgumentException(static::class . ' must set "protected static $binding".');
     }
     
-    self::$inst = self::$inst ?: (static::$ioc)::instance()->make(static::$binding);
-    return self::$inst;
+    try {
+      return (static::$ioc)::instance()->make(static::$binding);
+    } catch(ReflectionException $e) {
+      throw new InvalidArgumentException(static::class . " has an invalid binding: {$e->getMessage()}", 0, $e);
+    }
   }
   
   /**

@@ -3,5 +3,5 @@
 use BapCat\Facade\Facade;
 
 class FooFacade extends Facade {
-  protected static $_binding = 'Foo';
+  protected static $binding = 'Foo';
 }

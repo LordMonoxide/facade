@@ -8,4 +8,8 @@ class Foo {
   public function returnThisVar($var) {
     return $var;
   }
+  
+  public function returnThis() {
+    return $this;
+  }
 }

@@ -5,23 +5,28 @@ require_once __DIR__ . '/stubs/Foo.php';
 require_once __DIR__ . '/stubs/FooFacade.php';
 
 use BapCat\Facade\Facade;
-use BapCat\Phi\Phi;
 
 class FacadeTest extends PHPUnit_Framework_TestCase {
-  public function setUp() {
-    Facade::setIoc(Phi::instance());
-  }
-  
-  public function testFacade() {
+  public function testCallingFacadeMethods() {
     $this->assertEquals('bar', FooFacade::getBar());
     $this->assertEquals('bar', FooFacade::returnThisVar('bar'));
   }
   
   /**
-   * @expectedException InvalidArgumentException
+   * @dataProvider       badBindingsProvider
+   * @expectedException  InvalidArgumentException
    */
-  public function testBadFacade() {
-    BadFacade::test();
+  public function testBadBindings($class) {
+    require_once __DIR__ . "/stubs/$class.php";
+    
+    $class::test();
+  }
+  
+  public function badBindingsProvider() {
+    return [
+      [BadFacade::class],
+      [InvalidBindingFacade::class],
+    ];
   }
   
   /**
@@ -30,5 +35,9 @@ class FacadeTest extends PHPUnit_Framework_TestCase {
    */
   public function testCallingMethodThatDoesntExist() {
     FooFacade::thisMethodDoesntExist();
+  }
+  
+  public function testThatInstanceIsNotCached() {
+    $this->assertNotSame(FooFacade::returnThis(), FooFacade::returnThis());
   }
 }
