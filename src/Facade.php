@@ -1,39 +1,33 @@
 <?php namespace BapCat\Facade;
 
-use BapCat\Interfaces\Ioc\Ioc;
+use BapCat\Phi\Phi;
 
-use InvalidArgumentException;
-
-/**
- * Pseudo-static accessors for Phi bindings
- *
- * All Facades must set `protected static $_binding` to a valid Phi binding.
- */
-class Facade {
-  private static $ioc = null;
+abstract class Facade {
+  protected static $ioc = Phi::class;
   
-  public static function setIoc(Ioc $ioc) {
-    self::$ioc = $ioc;
+  private static $inst;
+  
+  protected static function inst() {
+    // Throw an exception if $binding wasn't set in the subclass
+    if(!isset(static::$binding)) {
+      throw new InvalidArgumentException(get_called_class() . ' must set "protected static $binding".');
+    }
+    
+    self::$inst = self::$inst ?: (static::$ioc)::instance()->make(static::$binding);
+    return self::$inst;
   }
   
   /**
-   * Passes arguments on to the instance gotten from Phi
-   *
-   * @throws  InvalidArgumentException  If $_binding wasn't set in the subclass
-   *
-   * @param   string  $name       The function to call
-   * @param   array   $arguments  The arguments to pass to the binding
-   *
-   * @returns mixed   The return value of the function
+   * Passes arguments on to the instance gotten from IoC
+   * 
+   * @throws  InvalidArgumentException  If $binding wasn't set in the subclass
+   * 
+   * @param  string  $name       The function to call
+   * @param  array   $arguments  The arguments to pass to the binding
+   * 
+   * @return  mixed  The return value of the function
    */
   public static function __callStatic($name, array $arguments) {
-    // Throw an exception if $_binding wasn't set in the subclass
-    if(!isset(static::$_binding)) {
-      throw new InvalidArgumentException(get_called_class() . ' must set "protected static $_binding".');
-    }
-    
-    // Grab the instance and call the function
-    $instance = self::$ioc->make(static::$_binding);
-    return $instance->$name(...$arguments);
+    return static::inst()->$name(...$arguments);
   }
 }

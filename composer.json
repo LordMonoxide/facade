@@ -12,10 +12,12 @@
   ],
   "require": {
     "php": ">=5.6",
-    "bapcat/interfaces": "^1.0"
+    "bapcat/interfaces": "^1.0",
+    "bapcat/tailor": "^0.4",
+    "bapcat/propifier": "^1.2",
+    "bapcat/phi": "^2.0"
   },
   "require-dev": {
-    "bapcat/phi": "^1.0",
     "phpunit/phpunit": "^5.0"
   },
   "autoload": {
