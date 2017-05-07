@@ -9,7 +9,6 @@ use BapCat\Persist\Directory;
 use BapCat\Persist\Drivers\Local\LocalDriver;
 use BapCat\Tailor\Generator;
 use BapCat\Tailor\Tailor;
-use BapCat\Values\ClassName;
 
 class FacadeRegistry {
   /**
@@ -47,12 +46,12 @@ class FacadeRegistry {
   }
   
   /**
-   * @param  string     $name
-   * @param  ClassName  $binding
+   * @param  string  $name
+   * @param  string  $binding
    * 
    * @return  FacadeDefinition
    */
-  public function register($name, ClassName $binding) {
+  public function register($name, $binding) {
     $builder = $this->defs[$name] = new FacadeDefinition($name, $binding, get_class($this->ioc));
     
     $this->tailor->bindCallback($builder->name, function(Generator $gen) use($builder) {

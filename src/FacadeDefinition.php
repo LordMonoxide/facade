@@ -1,8 +1,6 @@
 <?php namespace BapCat\Facade;
 
 use BapCat\Propifier\PropifierTrait;
-use BapCat\Values\ClassName;
-use BapCat\Values\Text;
 
 class FacadeDefinition {
   use PropifierTrait;
@@ -13,7 +11,7 @@ class FacadeDefinition {
   private $name;
   
   /**
-   * @var  ClassName  $binding
+   * @var  string  $binding
    */
   private $binding;
   
@@ -23,11 +21,11 @@ class FacadeDefinition {
   private $ioc;
   
   /**
-   * @param  string     $name
-   * @param  ClassName  $binding
-   * @param  string     $ioc
+   * @param  string  $name
+   * @param  string  $binding
+   * @param  string  $ioc
    */
-  public function __construct($name, ClassName $binding, $ioc) {
+  public function __construct($name, $binding, $ioc) {
     $this->name    = $name;
     $this->binding = $binding;
     $this->ioc     = $ioc;
@@ -41,7 +39,7 @@ class FacadeDefinition {
   }
   
   /**
-   * @return  ClassName
+   * @return  string
    */
   protected function getBinding() {
     return $this->binding;
