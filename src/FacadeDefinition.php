@@ -1,6 +1,9 @@
 <?php namespace BapCat\Facade;
 
+use BapCat\Interfaces\Ioc\Ioc;
 use BapCat\Propifier\PropifierTrait;
+
+use ReflectionClass;
 
 class FacadeDefinition {
   use PropifierTrait;
@@ -16,16 +19,16 @@ class FacadeDefinition {
   private $binding;
   
   /**
-   * @var  string  $ioc
+   * @var  Ioc  $ioc
    */
   private $ioc;
   
   /**
    * @param  string  $name
    * @param  string  $binding
-   * @param  string  $ioc
+   * @param  Ioc     $ioc
    */
-  public function __construct($name, $binding, $ioc) {
+  public function __construct($name, $binding, Ioc $ioc) {
     $this->name    = $name;
     $this->binding = $binding;
     $this->ioc     = $ioc;
@@ -59,7 +62,8 @@ class FacadeDefinition {
     return [
       'name'    => $this->name,
       'binding' => $this->binding,
-      'ioc'     => $this->ioc,
+      'ioc'     => get_class($this->ioc),
+      'reflect' => new ReflectionClass($this->ioc->resolve($this->binding)),
     ];
   }
 }

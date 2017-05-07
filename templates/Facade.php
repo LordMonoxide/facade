@@ -3,13 +3,13 @@
 use BapCat\Facade\Facade;
 
 class {! $name !} extends Facade {
-@each($binding->reflect()->getConstants() as $const, $val)
+@each($reflect->getConstants() as $const, $val)
   const {! $const !} = {! $binding !}::{! $const !};
 @endeach
   
   protected static $ioc     = '{! $ioc !}';
   protected static $binding = '{! $binding !}';
-@each($binding->reflect()->getMethods() as $method)
+@each($reflect->getMethods() as $method)
 @if($method->isPublic() && !($method->isConstructor() || $method->isDestructor()))
   
   {! $method->getDocComment() !}

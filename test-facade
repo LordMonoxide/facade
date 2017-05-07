@@ -28,7 +28,7 @@ class Test {
   }
 }
 
-$facade->register('HelloFacade', new ClassName(Test::class));
+$facade->register('HelloFacade', Test::class);
 
 HelloFacade::hello();
 var_dump(HelloFacade::HELLO);

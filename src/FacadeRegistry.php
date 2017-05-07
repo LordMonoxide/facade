@@ -40,7 +40,7 @@ class FacadeRegistry {
     $filesystem = new LocalDriver(__DIR__ . '/../templates');
     $templates  = $filesystem->getDirectory('/');
     
-    $hasher = new FacadeHashGenerator(new Sha1WeakHasher());
+    $hasher = $ioc->make(FacadeHashGenerator::class, [new Sha1WeakHasher()]);
     
     $this->tailor = $ioc->make(Tailor::class, [$templates, $cache, $pipeline, $hasher]);
   }
@@ -52,7 +52,7 @@ class FacadeRegistry {
    * @return  FacadeDefinition
    */
   public function register($name, $binding) {
-    $builder = $this->defs[$name] = new FacadeDefinition($name, $binding, get_class($this->ioc));
+    $builder = $this->defs[$name] = new FacadeDefinition($name, $binding, $this->ioc);
     
     $this->tailor->bindCallback($builder->name, function(Generator $gen) use($builder) {
       $file = $gen->generate('Facade', $builder->toArray());
