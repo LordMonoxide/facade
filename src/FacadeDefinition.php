@@ -56,7 +56,7 @@ class FacadeDefinition {
   }
   
   /**
-   * @return  array<string, string>
+   * @return  array
    */
   public function toArray() {
     return [

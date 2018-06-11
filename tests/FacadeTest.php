@@ -4,8 +4,6 @@ require_once __DIR__ . '/stubs/BadFacade.php';
 require_once __DIR__ . '/stubs/Foo.php';
 require_once __DIR__ . '/stubs/FooFacade.php';
 
-use BapCat\Facade\Facade;
-
 class FacadeTest extends PHPUnit_Framework_TestCase {
   public function testCallingFacadeMethods() {
     $this->assertEquals('bar', FooFacade::getBar());
