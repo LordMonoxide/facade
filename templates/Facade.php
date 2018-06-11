@@ -10,7 +10,7 @@ class {! $name !} extends Facade {
   protected static $ioc     = '{! $ioc !}';
   protected static $binding = '{! $binding !}';
 @each($reflect->getMethods() as $method)
-@if($method->isPublic() && !($method->isConstructor() || $method->isDestructor()))
+@if($method->isPublic() && !($method->isConstructor() || $method->isDestructor() || strpos($method->getName(), '__') === 0))
   
   {! $method->getDocComment() !}
   
