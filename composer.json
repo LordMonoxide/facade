@@ -1,7 +1,7 @@
 {
   "name": "bapcat/facade",
   "description": "Pseudo-static accessors for Phi bindings",
-  "license": "GPLv3",
+  "license": "GPL-3.0-or-later",
   "homepage": "http://github.com/BapCat/Facade",
   "keywords": ["Facade", "IOC", "Inversion of control", "DI", "Dependency injection"],
   "authors": [
@@ -11,14 +11,15 @@
     }
   ],
   "require": {
-    "php": ">=5.6",
-    "bapcat/interfaces": "^1.0",
-    "bapcat/tailor": "^0.4",
-    "bapcat/propifier": "^1.2",
-    "bapcat/phi": "^2.0"
+    "php": "^7.1",
+    "ext-json": "*",
+    "bapcat/tailor": "^0.5",
+    "bapcat/propifier": "^2.0",
+    "bapcat/phi": "^2.0 | ^3.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.0"
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
     "psr-4": {
