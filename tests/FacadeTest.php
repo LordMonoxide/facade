@@ -1,41 +1,42 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once __DIR__ . '/stubs/BadFacade.php';
 require_once __DIR__ . '/stubs/Foo.php';
 require_once __DIR__ . '/stubs/FooFacade.php';
 
-class FacadeTest extends PHPUnit_Framework_TestCase {
-  public function testCallingFacadeMethods() {
+class FacadeTest extends TestCase {
+  public function testCallingFacadeMethods(): void {
     $this->assertEquals('bar', FooFacade::getBar());
     $this->assertEquals('bar', FooFacade::returnThisVar('bar'));
   }
-  
+
   /**
    * @dataProvider       badBindingsProvider
    * @expectedException  InvalidArgumentException
    */
-  public function testBadBindings($class) {
+  public function testBadBindings($class): void {
     require_once __DIR__ . "/stubs/$class.php";
-    
+
     $class::test();
   }
-  
-  public function badBindingsProvider() {
+
+  public function badBindingsProvider(): array {
     return [
       [BadFacade::class],
       [InvalidBindingFacade::class],
     ];
   }
-  
+
   /**
-   * @requires PHP 7
-   * @expectedException Error
+   * @expectedException  Error
    */
-  public function testCallingMethodThatDoesntExist() {
+  public function testCallingMethodThatDoesntExist(): void {
     FooFacade::thisMethodDoesntExist();
   }
-  
-  public function testThatInstanceIsNotCached() {
+
+  public function testThatInstanceIsNotCached(): void {
     $this->assertNotSame(FooFacade::returnThis(), FooFacade::returnThis());
   }
 }
