@@ -1,6 +1,21 @@
 @php declare(strict_types=1);
 
+<?php
+
+/**
+ * @var ReflectionClass $reflect
+ * @var ReflectionMethod[] $methods
+ * @var ReflectionMethod $method
+ * @var string[] $imports
+ */
+
+?>
+
 use BapCat\Facade\Facade;
+
+@each($imports as $import)
+use {! $import !};
+@endeach
 
 class {! $name !} extends Facade {
 @each($reflect->getConstants() as $const, $val)
@@ -8,18 +23,77 @@ class {! $name !} extends Facade {
 @endeach
 
   /** @var string $ioc */
-  protected static $ioc     = '{! $ioc !}';
+  protected static $ioc = {! $ioc !}::class;
 
   /** @var string $binding */
-  protected static $binding = '{! $binding !}';
-@each($reflect->getMethods() as $method)
-@if($method->isPublic() && !($method->isConstructor() || $method->isDestructor() || strpos($method->getName(), '__') === 0))
+  protected static $binding = {! $binding !}::class;
+@each($methods as $method)
 
+@if(stripos($method->getDocComment(), '@inheritdoc') === false)
   {! $method->getDocComment() !}
+@else
+<?php
 
-  public static function {! $method->getName() !}(...$args) {
-    return self::inst()->{! $method->getName() !}(...$args);
+$parent = $reflect->getParentClass();
+
+if($parent !== false) {
+  try {
+    $parentMethod = $parent->getMethod($method->getName());
+    $docs = $parentMethod->getDocComment();
+  } catch(ReflectionException $ignored) { }
+}
+
+if(empty($docs)) {
+  foreach($reflect->getInterfaces() as $interface) {
+    $interfaceMethod = $interface->getMethod($method->getName());
+    $docs = $interfaceMethod->getDocComment();
   }
+}
+
+?>
+
+@if(!empty($docs))
+  {! $docs !}
 @endif
+@endif
+<?php
+
+$params = [];
+$args = [];
+
+foreach($method->getParameters() as $param) {
+  $p = '$' . $param->getName();
+  $args[] = $p;
+
+  if($param->isVariadic()) {
+    $p = "...$p";
+  }
+
+  if($param->hasType()) {
+    $p = "{$param->getType()} $p";
+
+    if($param->allowsNull()) {
+      $p = "?$p";
+    }
+  }
+
+  if($param->isOptional()) {
+    $type = $param->getDefaultValue();
+    // Default values for primitives may have constant, primitive values - hence the var_export
+    $p .= ' = ' . ($type instanceof ReflectionNamedType ? $type->getName() : var_export($type, true));
+  }
+
+  $params[] = $p;
+}
+
+?>
+
+  public static function {! $method->getName() !}({! implode(', ', $params) !})<?= $method->hasReturnType() ? ': ' . $method->getReturnType()->getName() : '' ?> {
+@if($method->hasReturnType() && $method->getReturnType()->getName() === 'void')
+    self::inst()->{! $method->getName() !}({! implode(', ', $args) !});
+@else
+    return self::inst()->{! $method->getName() !}({! implode(', ', $args) !});
+@endif
+  }
 @endeach
 }
