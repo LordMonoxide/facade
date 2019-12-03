@@ -4,10 +4,8 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use BapCat\Facade\FacadeRegistry;
-use BapCat\Interfaces\Ioc\Ioc;
 use BapCat\Persist\Drivers\Local\LocalDriver;
 use BapCat\Phi\Phi;
-use BapCat\Values\ClassName;
 
 $ioc = Phi::instance();
 
@@ -34,4 +32,4 @@ HelloFacade::hello();
 var_dump(HelloFacade::HELLO);
 
 //TODO
-    // Temporary workaround; nom grabs onto the first end parenthesis
+// Temporary workaround; nom grabs onto the first end parenthesis
