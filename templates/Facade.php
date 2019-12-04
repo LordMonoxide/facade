@@ -3,6 +3,8 @@
 <?php
 
 /**
+ * @var string $binding
+ * @var string $ioc
  * @var ReflectionClass $reflect
  * @var ReflectionMethod[] $methods
  * @var ReflectionMethod $method
@@ -86,9 +88,21 @@ foreach($method->getParameters() as $param) {
   $params[] = $p;
 }
 
+if(!$method->hasReturnType()) {
+  $returnType = '';
+} else {
+  $returnType = $method->getReturnType()->getName();
+
+  if($returnType === 'self') {
+    $returnType = $binding;
+  }
+
+  $returnType = ": $returnType";
+}
+
 ?>
 
-  public static function {! $method->getName() !}({! implode(', ', $params) !})<?= $method->hasReturnType() ? ': ' . $method->getReturnType()->getName() : '' ?> {
+  public static function {! $method->getName() !}({! implode(', ', $params) !}){! $returnType !} {
 @if($method->hasReturnType() && $method->getReturnType()->getName() === 'void')
     self::inst()->{! $method->getName() !}({! implode(', ', $args) !});
 @else
